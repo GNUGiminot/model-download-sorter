@@ -1,0 +1,23 @@
+{
+  "extName": { "message": "Сортировщик 3D-моделей" },
+  "extDescription": { "message": "Складывает скачанные STL, STEP, 3MF и ZIP по папкам сайтов: MakerWorld, Printables, Thingiverse и другие." },
+  "optTitle": { "message": "Сортировщик 3D-моделей — настройки" },
+  "optEnabled": { "message": "Раскладывать загрузки по папкам" },
+  "optRoot": { "message": "Общая папка внутри папки загрузок" },
+  "optRootHint": { "message": "Браузер разрешает путь только внутри своей папки загрузок. Пример: 3D Models" },
+  "optSites": { "message": "Сайты и папки" },
+  "optSiteFolder": { "message": "Папка" },
+  "optSiteHosts": { "message": "Адреса сайта (через запятую)" },
+  "optAddSite": { "message": "Добавить сайт" },
+  "optRemove": { "message": "Удалить" },
+  "optOther": { "message": "Папка для остальных сайтов" },
+  "optTypes": { "message": "Типы файлов" },
+  "optZipHint": { "message": "ZIP переносится только с сайтов из списка выше." },
+  "optPerModel": { "message": "Каждую модель — в свою подпапку" },
+  "optPerModelHint": { "message": "Название берётся из заголовка страницы модели, иначе из имени файла. PlatePilot показывает такую подпапку одним источником." },
+  "optSave": { "message": "Сохранить" },
+  "optSaved": { "message": "Сохранено" },
+  "optReset": { "message": "Вернуть как было по умолчанию" },
+  "optExample": { "message": "Пример пути" },
+  "optConflict": { "message": "Если загрузками управляет ещё одно расширение (onDeterminingFilename), браузер применит только одно из них — отключите второе." }
+}

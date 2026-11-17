@@ -1,0 +1,9 @@
+{
+  "name": "model-download-sorter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome / Yandex Browser extension: sorts downloaded 3D models into per-site folders",
+  "scripts": {
+    "test": "node --test test/rules.test.js"
+  }
+}

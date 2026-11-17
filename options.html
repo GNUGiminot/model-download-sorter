@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title data-i18n="optTitle">Model Download Sorter</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1 data-i18n="extName"></h1>
+
+    <section class="card">
+      <label class="check"><input type="checkbox" id="enabled"> <span data-i18n="optEnabled"></span></label>
+      <label class="field">
+        <span data-i18n="optRoot"></span>
+        <input type="text" id="root">
+        <small data-i18n="optRootHint"></small>
+      </label>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="optSites"></h2>
+      <table>
+        <thead><tr><th data-i18n="optSiteFolder"></th><th data-i18n="optSiteHosts"></th><th></th></tr></thead>
+        <tbody id="sites"></tbody>
+      </table>
+      <button type="button" id="addSite" data-i18n="optAddSite"></button>
+      <label class="field">
+        <span data-i18n="optOther"></span>
+        <input type="text" id="otherFolder">
+      </label>
+    </section>
+
+    <section class="card">
+      <h2 data-i18n="optTypes"></h2>
+      <div id="types" class="types"></div>
+      <small data-i18n="optZipHint"></small>
+    </section>
+
+    <section class="card">
+      <label class="check"><input type="checkbox" id="perModelFolder"> <span data-i18n="optPerModel"></span></label>
+      <small data-i18n="optPerModelHint"></small>
+      <p class="example"><span data-i18n="optExample"></span>: <code id="example"></code></p>
+    </section>
+
+    <p class="note" data-i18n="optConflict"></p>
+
+    <div class="buttons">
+      <button type="button" id="save" class="primary" data-i18n="optSave"></button>
+      <button type="button" id="reset" data-i18n="optReset"></button>
+      <span id="status"></span>
+    </div>
+  </main>
+  <script src="rules.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

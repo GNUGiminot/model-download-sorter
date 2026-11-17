@@ -1,0 +1,23 @@
+{
+  "extName": { "message": "Model Download Sorter" },
+  "extDescription": { "message": "Puts downloaded STL, STEP, 3MF and ZIP files into per-site folders: MakerWorld, Printables, Thingiverse and others." },
+  "optTitle": { "message": "Model Download Sorter — settings" },
+  "optEnabled": { "message": "Sort downloads into folders" },
+  "optRoot": { "message": "Main folder inside the downloads folder" },
+  "optRootHint": { "message": "The browser only allows paths inside its downloads folder. Example: 3D Models" },
+  "optSites": { "message": "Sites and folders" },
+  "optSiteFolder": { "message": "Folder" },
+  "optSiteHosts": { "message": "Site addresses (comma separated)" },
+  "optAddSite": { "message": "Add site" },
+  "optRemove": { "message": "Remove" },
+  "optOther": { "message": "Folder for other sites" },
+  "optTypes": { "message": "File types" },
+  "optZipHint": { "message": "ZIP files are moved only when they come from a site in the list above." },
+  "optPerModel": { "message": "Put each model in its own subfolder" },
+  "optPerModelHint": { "message": "The name comes from the model page title, otherwise from the file name. PlatePilot shows such a subfolder as one source." },
+  "optSave": { "message": "Save" },
+  "optSaved": { "message": "Saved" },
+  "optReset": { "message": "Restore defaults" },
+  "optExample": { "message": "Example path" },
+  "optConflict": { "message": "If another extension also renames downloads (onDeterminingFilename), the browser applies only one of them — turn the other one off." }
+}
