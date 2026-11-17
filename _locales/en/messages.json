@@ -14,7 +14,7 @@
   "optTypes": { "message": "File types" },
   "optZipHint": { "message": "ZIP files are moved only when they come from a site in the list above." },
   "optPerModel": { "message": "Put each model in its own subfolder" },
-  "optPerModelHint": { "message": "The name comes from the model page title, otherwise from the file name. PlatePilot shows such a subfolder as one source." },
+  "optPerModelHint": { "message": "A short Latin name from the model page address or title, otherwise from the file name. PlatePilot shows such a subfolder as one source." },
   "optSave": { "message": "Save" },
   "optSaved": { "message": "Saved" },
   "optReset": { "message": "Restore defaults" },
