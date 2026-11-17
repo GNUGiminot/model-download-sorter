@@ -70,10 +70,50 @@
     return s;
   }
 
+  const TRANSLIT = {
+    а: 'a', б: 'b', в: 'v', г: 'g', д: 'd', е: 'e', ё: 'e', ж: 'zh', з: 'z', и: 'i', й: 'y', к: 'k',
+    л: 'l', м: 'm', н: 'n', о: 'o', п: 'p', р: 'r', с: 's', т: 't', у: 'u', ф: 'f', х: 'kh', ц: 'ts',
+    ч: 'ch', ш: 'sh', щ: 'shch', ъ: '', ы: 'y', ь: '', э: 'e', ю: 'yu', я: 'ya',
+  };
+
+  // Short Latin folder name: "Оригинальный 3D Benchy!" -> "originalnyy-3d-benchy".
+  function shortName(text, maxLength) {
+    const max = maxLength || 40;
+    const words = String(text || '')
+      .toLowerCase()
+      .replace(/[а-яё]/g, (c) => TRANSLIT[c])
+      .normalize('NFKD')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim()
+      .split(' ')
+      .filter(Boolean);
+    let out = '';
+    for (const w of words) {
+      const next = out ? out + '-' + w : w;
+      if (next.length > max) break;
+      out = next;
+    }
+    return out || (words[0] || '').slice(0, max);
+  }
+
+  // Slug from a model page address: makerworld.com/ru/models/1123776-original-3d-benchy,
+  // printables.com/model/12345-cable-clip, cults3d.com/en/3d-model/home/spiral-vase.
+  function modelNameFromUrl(url) {
+    let path;
+    try {
+      path = decodeURIComponent(new URL(url).pathname);
+    } catch (e) {
+      return '';
+    }
+    const m = /\/(?:models?|3d-model(?:\/[^/]+)?|design|thing)\/(?:\d+-)?([^/]*[a-zа-я][^/]*)\/?$/i.exec(path);
+    return m ? shortName(m[1].replace(/^\d+-/, '')) : '';
+  }
+
   function modelNameFromTitle(title) {
     let t = String(title || '');
     for (let i = 0; i < 3; i++) t = t.replace(TITLE_SUFFIX, '');
-    return safeName(t);
+    t = t.split(/\s+[|—–]\s+/)[0]; // "Benchy — free 3D model ..." -> "Benchy"
+    return shortName(t);
   }
 
   // Returns the new relative path, or null to leave the download as it is.
@@ -105,8 +145,10 @@
       const sameSite = site
         ? siteForUrl(info.tabUrl, s.sites) === site
         : !!hostOf(info.tabUrl) && hostOf(info.tabUrl) === hostOf(info.referrer || info.url);
-      let model = sameSite ? modelNameFromTitle(info.tabTitle) : '';
-      if (!model) model = safeName(base.replace(/\.[^.]+$/, ''));
+      const referrerSite = site ? siteForUrl(info.referrer, s.sites) === site : !!hostOf(info.referrer);
+      let model = (referrerSite && modelNameFromUrl(info.referrer)) ||
+        (sameSite && (modelNameFromUrl(info.tabUrl) || modelNameFromTitle(info.tabTitle))) ||
+        shortName(base.replace(/\.[^.]+$/, ''));
       if (model) parts.push(model);
     }
     parts.push(safeName(base, 150) || 'model.' + ext);
@@ -121,6 +163,8 @@
     siteForUrl,
     extensionOf,
     safeName,
+    shortName,
+    modelNameFromUrl,
     modelNameFromTitle,
     chooseFolder,
   };

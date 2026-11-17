@@ -62,11 +62,11 @@ test('per-model subfolder from the page title', () => {
   assert.equal(MDS.chooseFolder({
     filename: 'Benchy_plate.3mf', referrer: 'https://makerworld.com/en/models/1',
     tabUrl: 'https://makerworld.com/en/models/1', tabTitle: '3DBenchy: the jolly torture test - MakerWorld',
-  }, D), '3D Models/MakerWorld/3DBenchy the jolly torture test/Benchy_plate.3mf');
+  }, D), '3D Models/MakerWorld/3dbenchy-the-jolly-torture-test/Benchy_plate.3mf');
   assert.equal(MDS.chooseFolder({
     filename: 'clip.stl', url: 'https://files.printables.com/clip.stl',
     tabUrl: 'https://www.printables.com/model/5', tabTitle: 'Cable clip by Joe | Download free STL model | Printables.com',
-  }, D), '3D Models/Printables/Cable clip by Joe Download free STL model/clip.stl');
+  }, D), '3D Models/Printables/cable-clip-by-joe/clip.stl');
 });
 
 test('per-model subfolder ignores a tab on another site', () => {
@@ -80,7 +80,7 @@ test('Other site uses the tab title only when the tab is the source page', () =>
   assert.equal(MDS.chooseFolder({
     filename: 'vase.stl', referrer: 'https://cults3d.com/en/3d-model/vase',
     tabUrl: 'https://cults3d.com/en/3d-model/vase', tabTitle: 'Spiral vase - Cults',
-  }, D), '3D Models/Other/Spiral vase/vase.stl');
+  }, D), '3D Models/Other/vase/vase.stl');
   assert.equal(MDS.chooseFolder({
     filename: 'vase.stl', referrer: 'https://cults3d.com/x', tabUrl: 'https://news.example/', tabTitle: 'News',
   }, D), '3D Models/Other/vase/vase.stl');
@@ -101,4 +101,26 @@ test('user sites and folders from settings', () => {
   });
   assert.equal(MDS.chooseFolder({ filename: 'a.stl', referrer: 'https://cults3d.com/x' }, s), 'Cults/a.stl');
   assert.equal(MDS.chooseFolder({ filename: 'a.stl', referrer: 'https://makerworld.com/' }, s), 'Прочее/a.stl');
+});
+
+test('short Latin model folder names', () => {
+  assert.equal(MDS.chooseFolder({
+    filename: 'Original_3DBenchy_3Dprintconcept.3mf', url: 'blob:https://makerworld.com/abc',
+    tabUrl: 'https://makerworld.com/ru/models/1123776-original-3d-benchy?from=search#profileId-1355120',
+    tabTitle: 'Оригинальный 3D Benchy — бесплатная модель для 3D-печати — MakerWorld',
+  }, D), '3D Models/MakerWorld/original-3d-benchy/Original_3DBenchy_3Dprintconcept.3mf');
+  assert.equal(MDS.chooseFolder({
+    filename: 'a.stl', referrer: 'https://www.printables.com/model/12345-cable-clip-for-desk/files',
+  }, D), '3D Models/Printables/a/a.stl');
+  assert.equal(MDS.chooseFolder({
+    filename: 'a.stl', referrer: 'https://www.printables.com/model/12345-cable-clip-for-desk',
+  }, D), '3D Models/Printables/cable-clip-for-desk/a.stl');
+  assert.equal(MDS.chooseFolder({
+    filename: 'x.stl', url: 'https://cdn.thingiverse.com/x.stl', tabUrl: 'https://www.thingiverse.com/thing:763622',
+    tabTitle: 'Держатель для катушки — большой | Thingiverse',
+  }, D), '3D Models/Thingiverse/derzhatel-dlya-katushki/x.stl');
+  assert.equal(MDS.modelNameFromTitle('3DBenchy: the jolly torture test - MakerWorld'), '3dbenchy-the-jolly-torture-test');
+  assert.equal(MDS.shortName('A very long model name that goes on and on beyond forty chars'), 'a-very-long-model-name-that-goes-on-and');
+  assert.equal(MDS.modelNameFromUrl('https://cults3d.com/en/3d-model/home/spiral-vase'), 'spiral-vase');
+  assert.equal(MDS.shortName('Ёжик в тумане'), 'ezhik-v-tumane');
 });
