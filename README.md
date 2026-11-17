@@ -1,5 +1,7 @@
 # Сортировщик 3D-моделей (Model Download Sorter)
 
+**English:** a Chrome / Yandex Browser extension (Manifest V3). Downloaded `.stl`, `.step`, `.stp` and `.3mf` files, and `.zip` archives from known model sites, go to `<Downloads>/3D Models/<site>/<model>/`: MakerWorld, Printables, Thingiverse or Other. Point the [PlatePilot](https://github.com/GNUGiminot/platepilot-orcaslicer) plugin for OrcaSlicer at `3D Models`, and each model shows up as a source of its own. To install, download the release zip, unpack it, open `chrome://extensions`, turn on Developer mode and choose Load unpacked. The interface is in English and Russian. Nothing is sent anywhere. MIT licence.
+
 Расширение для Chrome и Яндекс Браузера (Manifest V3). Скачанные модели `.stl`, `.step`, `.stp`, `.3mf` и архивы `.zip` с сайтов моделей браузер сам кладёт в отдельную папку, разложенную по сайтам:
 
 ```
@@ -11,9 +13,12 @@
     Other/spiral-vase/vase.stl            ← Cults3D и все остальные сайты
 ```
 
-Зачем: плагин PlatePilot для OrcaSlicer может следить только за `…\Downloads\3D Models`, а не за всей папкой загрузок со сторонними архивами. В PlatePilot подпапка с файлами показывается одним источником, поэтому по умолчанию каждая модель кладётся в свою подпапку (выключается в настройках).
+Зачем: плагин [PlatePilot](https://github.com/GNUGiminot/platepilot-orcaslicer) для OrcaSlicer может следить только за `…\Downloads\3D Models`, а не за всей папкой загрузок со сторонними архивами. В PlatePilot подпапка с файлами показывается одним источником, поэтому по умолчанию каждая модель кладётся в свою подпапку (выключается в настройках).
 
 ## Установка (распакованное расширение, режим разработчика)
+
+1. Скачайте `model-download-sorter-<версия>.zip` со страницы [Releases](https://github.com/GNUGiminot/model-download-sorter/releases) и распакуйте его в постоянную папку, например в «Документы».
+2. Установите эту папку в браузер, как описано ниже.
 
 Расширение ставится **папкой**, а не файлом. Полностью автоматически это сделать нельзя: Chrome не даёт сторонним программам ставить расширения не из магазина.
 
@@ -24,7 +29,7 @@
 **Chrome**
 1. Откройте `chrome://extensions`.
 2. Включите «Режим разработчика» (переключатель справа вверху).
-3. «Загрузить распакованное расширение» → выберите папку `G:\CODproject\model-download-sorter` (ту, где лежит `manifest.json`).
+3. «Загрузить распакованное расширение» → выберите распакованную папку `model-download-sorter` (ту, где лежит `manifest.json`).
 
 **Яндекс Браузер**
 1. Откройте `browser://extensions` (или «Настройки» → «Дополнения» → внизу «Расширения для разработчиков»).
@@ -35,7 +40,7 @@
 
 ### Настройки браузера, без которых не заработает
 
-- **Папка загрузок.** Путь расширение может задать только внутри папки загрузок браузера. Если там `G:\Download`, модели окажутся в `G:\Download\3D Models\…`. В PlatePilot укажите именно `…\3D Models`.
+- **Папка загрузок.** Путь расширение может задать только внутри папки загрузок браузера. Если там `D:\Downloads`, модели окажутся в `D:\Downloads\3D Models\…`. В PlatePilot укажите именно `…\3D Models`.
 - **«Всегда спрашивать, куда сохранять файлы»** — если включено, браузер покажет окно «Сохранить как» с уже подставленной папкой; удобнее выключить.
 - **Конфликт расширений.** Если ещё одно расширение переименовывает загрузки (`onDeterminingFilename`, например другие «сортировщики загрузок»), браузер применит только одно из них. Отключите второе.
 
@@ -90,4 +95,8 @@ npm test
 | `test/rules.test.js` | юнит-тесты на `node:test` |
 | `install.cmd` | открывает страницу расширений и копирует путь к папке |
 
-Разрешение `tabs` нужно, чтобы прочитать адрес и заголовок вкладки, с которой скачана модель. Расширение никуда ничего не отправляет и не публикуется в магазине.
+Разрешение `tabs` нужно, чтобы прочитать адрес и заголовок вкладки, с которой скачана модель. Расширение никуда ничего не отправляет. В Chrome Web Store его пока нет.
+
+## Лицензия
+
+MIT.
